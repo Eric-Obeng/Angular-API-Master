@@ -1,14 +1,19 @@
-<div class="post-list" *ngIf="postsWithComments$ | async as posts">
+<div class="post-list" *ngIf="posts$ | async as posts">
   <app-post-create />
   @for (post of posts; track $index) {
   <div class="post-card">
-    <a [routerLink]="['/post-details', post.post.id]">
-      <h2>{{ post.post.id }}</h2>
-      <p>{{ post.post.body }}</p>
-      <p>{{ post.commentsCount }}</p>
+    <a [routerLink]="['/post-details', post.id]">
+      <h2>{{ post.id }}</h2>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.body }}</p>
     </a>
     <!-- <a [routerLink]="['/post-details', post.post.id]">Read More</a> -->
   </div>
-
   }
+
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+  />
 </div>
