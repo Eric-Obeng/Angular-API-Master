@@ -81,6 +81,7 @@
       &:hover {
         background-color: $col-500;
         transform: scale(1.02);
+        color: $col-300;
       }
 
       &:disabled {
