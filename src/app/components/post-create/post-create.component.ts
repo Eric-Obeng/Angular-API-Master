@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 import { Data } from '../../interfaces/data';
-import { FormsComponent } from "../forms/forms.component";
+import { FormsComponent } from '../forms/forms.component';
 
 @Component({
   selector: 'app-post-create',
@@ -20,9 +20,11 @@ export class PostCreateComponent {
     this.showFormModal = true;
   }
 
-  handleForSubmit(post: Data) {
+  handleFormSubmit(post: Data) {
     this.postService.createPost(post).subscribe({
-      next: () => {
+      next: (newPost) => {
+        const currentPosts = this.postService.getLocalPostsValue();
+        this.postService['localPostsSubject'].next([newPost, ...currentPosts]);
         this.router.navigate(['/posts']);
         this.showFormModal = false;
       },
