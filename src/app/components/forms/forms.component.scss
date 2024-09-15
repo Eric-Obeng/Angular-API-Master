@@ -1,0 +1,111 @@
+@import "../../../styleSheet/variables";
+
+.form-modal {
+  background-color: $col-100;
+  color: $col-300;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba($col-200, 0.3);
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+
+  h2 {
+    color: $col-400;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    div {
+      margin-bottom: 1rem;
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: $col-300;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid $col-200;
+        border-radius: 4px;
+        background-color: $col-200;
+        color: $col-300;
+        font-size: 1rem;
+        box-shadow: 0 1px 2px rgba($col-200, 0.2);
+
+        &:focus {
+          border-color: $col-400;
+          outline: none;
+          box-shadow: 0 0 5px rgba($col-400, 0.4);
+        }
+
+        &::placeholder {
+          color: $col-300;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 150px;
+      }
+
+      small {
+        color: $col-500;
+        font-size: 0.875rem;
+        margin-top: 0.5rem;
+        display: block;
+      }
+    }
+
+    button {
+      background-color: $col-400;
+      color: $col-100;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+
+      &:hover {
+        background-color: $col-500;
+        transform: scale(1.02);
+      }
+
+      &:disabled {
+        background-color: $col-200;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Accessibility Improvements
+[aria-invalid="true"] {
+  border-color: $col-500;
+}
+
+[aria-describedby] {
+  position: relative;
+}
+
+[aria-describedby]::after {
+  content: attr(aria-describedby);
+  color: $col-500;
+  font-size: 0.875rem;
+  position: absolute;
+  bottom: -1.5rem;
+  left: 0;
+  width: 100%;
+}
