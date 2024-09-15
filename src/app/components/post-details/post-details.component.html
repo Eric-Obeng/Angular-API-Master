@@ -1,1 +1,23 @@
-<p>post-details works!</p>
+<div class="details">
+  <div *ngIf="post$ | async as post">
+    <h1>{{ post.id }}</h1>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+
+    <button (click)="openPostForm()">Edit Post</button>
+
+    @if (showFormModal) {
+
+    <app-forms [post]="currentPost" (formSubmit)="handleForEdit($event)" />
+    }
+  </div>
+
+  <div *ngIf="comments$ | async as comments">
+    <h1>comments</h1>
+    @for (comment of comments; track $index) {
+    <p>{{ comment.name }}</p>
+    <p>{{ comment.email }}</p>
+    <p>{{ comment.body }}</p>
+    }
+  </div>
+</div>
