@@ -1,0 +1,54 @@
+@import "../../../styleSheet/mixins";
+@import "../../../styleSheet/variables";
+
+.post-list {
+  width: 100%;
+  padding: 2.4rem;
+  @include flex-layout(column, center, center, 2rem);
+
+  .post-header {
+    @include flex-layout(column, center, center, 2rem);
+    width: 100%;
+    h2 {
+      font-size: 4.5rem;
+    }
+
+    .create {
+      width: 100%;
+      margin: auto;
+    }
+  }
+
+  .post-card {
+    width: 100%;
+    .post {
+      @include flex-layout(column, start, center, 2rem);
+      @include card(100%, 100%, 2rem);
+      color: $col-300;
+      text-decoration: none;
+
+      &:link,
+      &:active {
+        color: $col-300;
+      }
+
+      .id {
+        @include flex-layout(column, center, center, 2rem);
+        @include card(4.5rem, 4.5rem, 50%);
+        background-color: $col-500;
+        font-size: 2rem;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .title {
+        font-size: 3.5rem;
+        font-weight: bold;
+      }
+
+      .body {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

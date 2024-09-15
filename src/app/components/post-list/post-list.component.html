@@ -1,19 +1,27 @@
 <div class="post-list" *ngIf="posts$ | async as posts">
-  <app-post-create />
+  <div class="post-header">
+    <h2>PostPilot</h2>
+    <app-post-create class="create"/>
+  </div>
   @for (post of posts; track $index) {
   <div class="post-card">
-    <a [routerLink]="['/post-details', post.id]">
-      <h2>{{ post.id }}</h2>
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.body }}</p>
+    <a
+      [routerLink]="['/post-details', post.id]"
+      class="post"
+      title="click to view post"
+    >
+      <p class="id">{{ post.id }}</p>
+      <p class="title">{{ post.title }}</p>
+      <p class="body">{{ post.body }}</p>
     </a>
     <!-- <a [routerLink]="['/post-details', post.post.id]">Read More</a> -->
   </div>
   }
-
-  <app-pagination
-    [currentPage]="currentPage"
-    [totalPages]="totalPages"
-    (pageChange)="onPageChange($event)"
-  />
+  <div class="pagination">
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChange)="onPageChange($event)"
+    />
+  </div>
 </div>
