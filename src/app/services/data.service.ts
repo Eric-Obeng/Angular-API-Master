@@ -38,27 +38,6 @@ export class DataService {
     this.savePostsToLocalStorage(posts);
   }
 
-  private mergePosts(apiPosts: Data[]): Data[] {
-    const localPosts = this.getLocalPostsValue();
-    const mergedPosts = [...localPosts];
-
-    apiPosts.forEach((apiPost) => {
-      if (!localPosts.some((localPost) => localPost.id === apiPost.id)) {
-        mergedPosts.push(apiPost);
-      }
-    });
-
-    return mergedPosts;
-  }
-
-  // Get the next unique ID based on the existing posts
-  private getNextId(): number {
-    const allPosts = this.getLocalPostsValue();
-    const maxId =
-      allPosts.length > 0 ? Math.max(...allPosts.map((post) => post.id)) : 0;
-    return maxId + 1;
-  }
-
   getAllPosts(page: number = 1, limit: number = 10): Observable<Data[]> {
     const params = new HttpParams()
       .set('_page', page.toString())
@@ -66,9 +45,9 @@ export class DataService {
 
     return this.http.get<Data[]>(this.API_URL, { params }).pipe(
       map((apiPosts) => {
-        const mergedPosts = this.mergePosts(apiPosts);
-        this.updateLocalPosts(mergedPosts);
-        return mergedPosts;
+        // Update localPosts with only the current page's posts, not merged
+        this.updateLocalPosts(apiPosts);
+        return apiPosts;
       }),
       catchError((error) => {
         console.error('Error fetching posts', error);
@@ -129,5 +108,13 @@ export class DataService {
     return this.localPostsSubject.pipe(
       map((posts: Data[]) => posts.filter((post) => post.id === postId))
     );
+  }
+
+  // Get the next unique ID based on the existing posts
+  private getNextId(): number {
+    const allPosts = this.getLocalPostsValue();
+    const maxId =
+      allPosts.length > 0 ? Math.max(...allPosts.map((post) => post.id)) : 0;
+    return maxId + 1;
   }
 }
