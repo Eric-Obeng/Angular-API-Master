@@ -6,13 +6,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.scss',
+  styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent {
-  @Input() currentPage: number = 1;
+  @Input() currentPage!: number;
   @Input() totalPages!: number;
   @Output() pageChange = new EventEmitter<number>();
 
+  // Emit the new page number when the user clicks on a pagination button
   changePage(newPage: number): void {
     if (newPage >= 1 && newPage <= this.totalPages) {
       this.pageChange.emit(newPage);
