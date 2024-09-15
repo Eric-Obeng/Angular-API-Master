@@ -1,9 +1,7 @@
-<div>
-  <h2>Create New Post</h2>
-  <a routerLink="/posts">Back to Posts</a>
+<div class="create-post">
+  @if(!showFormModal){
   <button (click)="openPostForm()">Create Post</button>
-
-  @if (showFormModal) {
+  } @if (showFormModal) {
   <app-forms (formSubmit)="handleFormSubmit($event)" />
   }
 </div>

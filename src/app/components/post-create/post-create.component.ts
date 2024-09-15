@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Data } from '../../interfaces/data';
 import { FormsComponent } from '../forms/forms.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-create',
   standalone: true,
-  imports: [FormsComponent],
+  imports: [FormsComponent, RouterModule, CommonModule],
   templateUrl: './post-create.component.html',
   styleUrl: './post-create.component.scss',
 })

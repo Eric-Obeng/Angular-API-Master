@@ -1,0 +1,23 @@
+@import "../../../styleSheet/mixins";
+
+.create-post {
+  @include flex-layout(column, center, center, 2rem);
+  width: 100%;
+  font-size: 2rem;
+  padding: 2rem;
+  // margin: auto;
+
+  button {
+    font-size: 3rem;
+    background-color: $col-500;
+    color: $col-400;
+    padding: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 2rem;
+
+    &:hover {
+      background-color: $col-600;
+    }
+  }
+}
