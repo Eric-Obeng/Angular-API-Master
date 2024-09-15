@@ -1,1 +1,9 @@
-<p>post-create works!</p>
+<div>
+  <h2>Create New Post</h2>
+  <a routerLink="/posts">Back to Posts</a>
+  <button (click)="openPostForm()">Create Post</button>
+
+  @if (showFormModal) {
+  <app-forms (formSubmit)="handleForSubmit($event)" />
+  }
+</div>
