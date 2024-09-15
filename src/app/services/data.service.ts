@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Data } from '../interfaces/data';
 
 @Injectable({
@@ -43,7 +43,9 @@ export class DataService {
     return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 
-  getPostByUserId(userId: number): Observable<Data[]> {
-    return this.http.get<Data[]>(`${this.API_URL}?userId=${userId}`);
+  getPostByUserId(postId: number): Observable<Data[]> {
+    return this.http
+      .get<Data[]>(this.API_URL)
+      .pipe(map((posts) => posts.filter((post) => post.id === postId)));
   }
 }
