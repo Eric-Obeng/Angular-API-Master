@@ -1,0 +1,31 @@
+<div class="form-modal">
+  <h2>{{ post ? "Edit Post" : "Create New Post" }}</h2>
+  <form [formGroup]="postForm" (ngSubmit)="submit()">
+    <div>
+      <label for="title">Post Title</label>
+      <input type="text" id="title" formControlName="title" required />
+      <div
+        *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched"
+      >
+        <small *ngIf="postForm.get('title')?.errors?.['required']"
+          >Title is required.</small
+        >
+      </div>
+    </div>
+    <div>
+      <label for="body">Post Body</label>
+      <textarea id="body" formControlName="body" required></textarea>
+      <div
+        *ngIf="postForm.get('body')?.invalid && postForm.get('body')?.touched"
+      >
+        <small *ngIf="postForm.get('body')?.errors?.['required']"
+          >Body is required.</small
+        >
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="postForm.invalid">
+      {{ post ? "Update Post" : "Create Post" }}
+    </button>
+  </form>
+</div>
