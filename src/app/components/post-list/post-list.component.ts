@@ -5,11 +5,12 @@ import { DataService } from '../../services/data.service';
 import { Observable, forkJoin, switchMap, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { PostCreateComponent } from "../post-create/post-create.component";
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PostCreateComponent],
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.scss'],
 })
@@ -41,11 +42,5 @@ export class PostListComponent implements OnInit {
         return forkJoin(postWithCommentObservables);
       })
     );
-  }
-
-  // Method to navigate to the post details page
-  viewPostDetails(postId: number): void {
-    console.log("Navigating to post Id", postId);
-    this.router.navigate(['/post-details', postId]);
   }
 }
