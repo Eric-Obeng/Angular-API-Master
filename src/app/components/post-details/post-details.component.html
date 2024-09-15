@@ -1,23 +1,40 @@
 <div class="details">
-  <div *ngIf="post$ | async as post">
-    <h1>{{ post.id }}</h1>
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.body }}</p>
+  <a class="link" [routerLink]="['/posts']">Go to Posts</a>
+  <div *ngIf="post$ | async as post" class="post">
+    <div class="col-1">
+      <h1 class="id">{{ post.id }}</h1>
+      <div class="post-content">
+        <h2 class="title">{{ post.title }}</h2>
+        <p class="body">{{ post.body }}</p>
+      </div>
+    </div>
 
-    <button (click)="openPostForm()">Edit Post</button>
+    <div class="actions">
+      @if (!showFormModal) {
+      <button (click)="openPostForm()">Edit Post</button>
+      }
+
+      <button class="delete">Delete Post</button>
+    </div>
 
     @if (showFormModal) {
-
-    <app-forms [post]="currentPost" (formSubmit)="handleFormEdit($event)" />
+    <div class="form-div">
+      <app-forms [post]="currentPost" (formSubmit)="handleFormEdit($event)" />
+    </div>
     }
   </div>
 
-  <div *ngIf="comments$ | async as comments">
-    <h1>comments</h1>
+  <div *ngIf="comments$ | async as comments" class="comment-div">
+    <h1>Comments</h1>
     @for (comment of comments; track $index) {
-    <p>{{ comment.name }}</p>
-    <p>{{ comment.email }}</p>
-    <p>{{ comment.body }}</p>
+
+    <div class="comment">
+      <div class="user">
+        <p class="name">{{ comment.name }}</p>
+        <p class="email">{{ comment.email }}</p>
+      </div>
+      <p>{{ comment.body }}</p>
+    </div>
     }
   </div>
 </div>

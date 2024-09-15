@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { CommentService } from '../../services/comment.service';
 import { Observable, of, switchMap } from 'rxjs';
@@ -10,7 +10,7 @@ import { FormsComponent } from "../forms/forms.component";
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [CommonModule, FormsComponent],
+  imports: [CommonModule, FormsComponent, RouterModule],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss',
 })

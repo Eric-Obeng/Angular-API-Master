@@ -2,172 +2,154 @@
 @import "../../../styleSheet/variables";
 
 .details {
-  padding: 2rem;
-  background-color: $col-100;
-  color: $col-300;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba($col-200, 0.3);
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 2.4rem;
+  @include flex-layout(column, start, center, 2rem);
 
-  h1,
-  h2 {
-    color: $col-400;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
-
-  h2 {
+  .link {
     font-size: 2.5rem;
-  }
-
-  p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  button {
-    background-color: $col-400;
-    color: $col-100;
-    border: none;
-    padding: 0.8rem 1.6rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2rem;
     font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-    margin: 1rem auto;
-    display: block;
+    text-decoration: none;
+    color: $col-100;
+    padding: 1rem;
+    border-radius: 2rem;
+    background-color: $col-500;
+    cursor: pointer;
+    margin: 5rem 0;
 
-    &:hover {
-      background-color: $col-500;
-      transform: scale(1.02);
-    }
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba($col-400, 0.4);
-    }
-
-    &:disabled {
-      background-color: $col-200;
-      cursor: not-allowed;
+    &:link,
+    &:active {
+      color: $col-300;
     }
   }
-
-  .form-modal {
-    background-color: $col-100;
-    color: $col-300;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba($col-200, 0.3);
-    margin: 2rem auto;
+  .post {
+    @include flex-layout(column, center, center, 2rem);
+    position: relative;
     width: 100%;
-    max-width: 600px;
 
-    h2 {
-      color: $col-400;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
+    .col-1 {
+      @include flex-layout(row, start, center, 2rem);
       width: 100%;
 
-      div {
-        margin-bottom: 1rem;
+      .id {
+        @include flex-layout(column, center, center, 2rem);
+        @include card(4.5rem, 4.5rem, 50%);
+        background-color: $col-500;
+        font-size: 2rem;
+        text-align: center;
+        font-weight: bold;
+      }
 
-        label {
-          display: block;
+      .post-content {
+        @include flex-layout(column, start, center, 2rem);
+        background-color: $col-200;
+        padding: 3rem;
+        border-radius: 2rem;
+        .title {
+          font-size: 3.5rem;
+
           font-weight: bold;
-          margin-bottom: 0.5rem;
-          color: $col-300;
         }
 
-        input,
-        textarea {
-          width: 100%;
-          padding: 0.8rem;
-          border: 1px solid $col-200;
-          border-radius: 4px;
-          background-color: $col-200;
-          color: $col-300;
-          font-size: 1rem;
-          box-shadow: 0 1px 2px rgba($col-200, 0.2);
-
-          &:focus {
-            border-color: $col-400;
-            outline: none;
-            box-shadow: 0 0 5px rgba($col-400, 0.4);
-          }
-
-          &::placeholder {
-            color: $col-300;
-          }
+        .body {
+          font-size: 2.5rem;
+          font-style: italic;
         }
-
-        textarea {
-          resize: vertical;
-          min-height: 150px;
-        }
-
-        small {
-          color: $col-500;
-          font-size: 0.875rem;
-          margin-top: 0.5rem;
-          display: block;
-        }
+      }
+    }
+    .actions {
+      @include flex-layout(row, end, center, 2rem);
+      padding: 1rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: darken($col-400, 10%);
+      }
+      &:active {
+        background-color: lighten($col-400, 10%);
+      }
+      &:focus {
+        outline: none;
       }
 
       button {
-        background-color: $col-400;
-        color: $col-100;
-        border: none;
-        padding: 0.8rem;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
+        width: 30%;
+        padding: 1rem 2rem;
+        font-size: 2rem;
         font-weight: bold;
-        transition: background-color 0.3s, transform 0.2s;
-        width: 100%; // Full width for button
-
+        background-color: $col-500;
+        color: $col-300;
+        border: none;
+        border-radius: 2rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
         &:hover {
-          background-color: $col-500;
-          transform: scale(1.02);
+          background-color: darken($col-600, 10%);
+        }
+        &:active {
+          background-color: lighten($col-600, 10%);
+        }
+        &:focus {
+          outline: none;
         }
 
-        &:disabled {
-          background-color: $col-200;
-          cursor: not-allowed;
+        &.delete {
+          background-color: rgb(221, 73, 14);
+          color: #fff;
         }
       }
     }
-  }
 
-  .comments {
-    margin-top: 2rem;
+    .form-div {
+      position: absolute;
+      bottom: -100px;
+      width: 100%;
+    }
+  }
+  .comment-div {
+    @include flex-layout(column, start, center, 3rem);
+    background-color: $col-200;
+    padding: 3rem;
+    border-radius: 2rem;
+    width: 100%;
 
     h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-align: center;
+      font-size: 3rem;
     }
 
-    p {
-      font-size: 1rem;
-      line-height: 1.4;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem;
-      background-color: $col-200;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba($col-200, 0.2);
+    .comment {
+      width: 100%;
+      @include flex-layout(column, start, center, 2rem);
+      background-color: $col-300;
+      color: $col-100;
+      padding: 3rem;
+      border-radius: 2rem;
+
+      .user {
+        @include flex-layout(column, start, center, 0.4rem);
+
+        .name,
+        .email {
+          font-size: 2.5rem;
+          font-weight: bold;
+        }
+      }
+
+      p {
+        font-size: 2rem;
+        font-style: italic;
+      }
     }
+  }
+}
+
+
+@media (min-width: 768px) {
+  .details {
+    max-width: 768px;
+    margin: auto;
   }
 }
