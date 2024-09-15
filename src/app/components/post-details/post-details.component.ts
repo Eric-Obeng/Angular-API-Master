@@ -67,7 +67,7 @@ export class PostDetailsComponent {
     this.showFormModal = true;
   }
 
-  handleForEdit(post: Data) {
+  handleFormEdit(post: Data) {
     this.postService.editPost(post).subscribe({
       next: () => {
         this.showFormModal = false;
