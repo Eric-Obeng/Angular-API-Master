@@ -1,0 +1,17 @@
+@import "./variables";
+
+@mixin flex-layout($direction: row, $align: start, $justify: start, $gap) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+@mixin card($with, $height, $radius) {
+  width: $with;
+  height: $height;
+  background-color: $col-200;
+  border-radius: $radius;
+  padding: 2rem;
+}
