@@ -2,7 +2,7 @@
   <a class="link" [routerLink]="['/posts']">Go to Posts</a>
   <div *ngIf="post$ | async as post" class="post">
     <div class="col-1">
-      <h1 class="id">{{ post.id }}</h1>
+      <!-- <h1 class="id">{{ post.id }}</h1> -->
       <div class="post-content">
         <h2 class="title">{{ post.title }}</h2>
         <p class="body">{{ post.body }}</p>
