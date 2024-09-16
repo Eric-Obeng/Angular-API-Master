@@ -24,6 +24,7 @@ export class CacheInterceptor implements HttpInterceptor {
 
     const cachedResponse = this.cacheService.get(req.urlWithParams);
     if (cachedResponse) {
+      console.log("Cache Interceptor", req.urlWithParams);
       return new Observable<HttpEvent<any>>((observer) => {
         observer.next(new HttpResponse({ body: cachedResponse }));
         observer.complete();

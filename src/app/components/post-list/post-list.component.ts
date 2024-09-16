@@ -38,7 +38,7 @@ export class PostListComponent implements OnInit {
       .pipe(
         tap((posts) => {
           // Adjust this based on the total number of posts you expect
-          this.totalPages = Math.ceil(150 / this.postsPerPage); // Set total pages based on expected post count
+          this.totalPages = Math.ceil(100 / this.postsPerPage); // Set total pages based on expected post count
         })
       );
   }

@@ -2,12 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { Data } from '../interfaces/data';
+import { environment } from '../../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private API_URL = 'https://jsonplaceholder.typicode.com/posts';
+  private API_URL = environment.apiUrl;
   private LOCAL_STORAGE_KEY = 'localPosts';
 
   private localPostsSubject = new BehaviorSubject<Data[]>(
