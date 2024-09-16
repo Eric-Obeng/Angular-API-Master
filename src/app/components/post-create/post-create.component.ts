@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { Data } from '../../interfaces/data';
 import { FormsComponent } from '../forms/forms.component';
 import { CommonModule } from '@angular/common';
@@ -8,24 +8,24 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-post-create',
   standalone: true,
-  imports: [FormsComponent, RouterModule, CommonModule],
+  imports: [FormsComponent, CommonModule],
   templateUrl: './post-create.component.html',
-  styleUrl: './post-create.component.scss',
+  styleUrls: ['./post-create.component.scss'],
 })
 export class PostCreateComponent {
-  showFormModal: boolean = false;
+  showFormModal = false;
 
   constructor(private postService: DataService, private router: Router) {}
 
-  openPostForm() {
+  openPostForm(): void {
     this.showFormModal = true;
   }
 
-  handleFormSubmit(post: Data) {
+  handleFormSubmit(post: Data): void {
     this.postService.createPost(post).subscribe({
       next: (newPost) => {
-        const currentPosts = this.postService.getLocalPostsValue();
-        this.postService['localPostsSubject'].next([newPost, ...currentPosts]);
+        console.log('Post created successfully:', newPost);
+        // No need to call updateLocalPosts here; DataService handles it.
         this.router.navigate(['/posts']);
         this.showFormModal = false;
       },

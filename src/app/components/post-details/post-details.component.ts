@@ -91,7 +91,8 @@ export class PostDetailsComponent {
 
   handleFormEdit(post: Data) {
     this.postService.editPost(post).subscribe({
-      next: () => {
+      next: (editedPost) => {
+        this.currentPost = editedPost;
         this.showFormModal = false;
         this.router.navigate(['/posts']);
       },

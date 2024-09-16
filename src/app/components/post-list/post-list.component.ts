@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Data } from '../../interfaces/data';
 import { DataService } from '../../services/data.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { PostCreateComponent } from '../post-create/post-create.component';
@@ -20,7 +20,7 @@ import { PaginationComponent } from '../pagination/pagination.component';
   styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit {
-  posts$!: Observable<Data[]>;
+  posts$: Observable<Data[]> = this.dataService.getLocalPosts();
   currentPage: number = 1;
   totalPages: number = 1;
   postsPerPage: number = 10;
@@ -32,20 +32,21 @@ export class PostListComponent implements OnInit {
   }
 
   loadPosts(): void {
-    // Fetch the posts for the current page and overwrite the posts in localPosts
-    this.posts$ = this.dataService
-      .getAllPosts(this.currentPage, this.postsPerPage)
-      .pipe(
-        tap((posts) => {
-          // Adjust this based on the total number of posts you expect
-          this.totalPages = Math.ceil(100 / this.postsPerPage); // Set total pages based on expected post count
-        })
-      );
+    this.dataService.getLocalPosts().pipe(
+      switchMap((posts) => {
+        const totalPosts = posts.length;
+        this.totalPages = Math.ceil(100 / this.postsPerPage);
+        console.log('Total Pages:', this.totalPages); // Debugging
+        return this.dataService.getAllPosts(this.currentPage, this.postsPerPage);
+      }),
+      tap((posts) => {
+        console.log('Posts loaded:', posts);
+      })
+    ).subscribe();
   }
 
   onPageChange(newPage: number): void {
-    // Update current page and reload posts
     this.currentPage = newPage;
-    this.loadPosts(); // Fetch the new page's posts
+    this.loadPosts();
   }
 }

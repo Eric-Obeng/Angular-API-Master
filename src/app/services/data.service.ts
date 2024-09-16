@@ -46,7 +46,7 @@ export class DataService {
 
     return this.http.get<Data[]>(this.API_URL, { params }).pipe(
       map((apiPosts) => {
-        // Update localPosts with only the current page's posts, not merged
+        
         this.updateLocalPosts(apiPosts);
         return apiPosts;
       }),
@@ -63,7 +63,8 @@ export class DataService {
         if (!newPost.id) {
           newPost.id = this.getNextId();
         }
-        const updatedPosts = [...this.localPostsSubject.value, newPost];
+        // Add the new post to the local posts array
+        const updatedPosts = [newPost, ...this.localPostsSubject.value];
         this.updateLocalPosts(updatedPosts);
         return newPost;
       }),
