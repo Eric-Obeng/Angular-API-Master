@@ -17,7 +17,6 @@
     cursor: pointer;
     margin: 5rem 0;
 
-
     &:link,
     &:active {
       color: $col-300;
@@ -59,7 +58,7 @@
       }
     }
     .actions {
-      @include flex-layout(row, end, center, 2rem);
+      @include flex-layout(row, center, center, 2rem);
       padding: 1rem;
       border-radius: 2rem;
       cursor: pointer;
@@ -99,8 +98,41 @@
         &.delete {
           background-color: rgb(221, 73, 14);
           color: #fff;
+          text-align: center;
         }
       }
+    }
+
+    .delete {
+      background-color: $col-200;
+      color: $col-300;
+      font-size: 2rem;
+      @include flex-layout(column, start, center, 2rem);
+      border-radius: 2rem;
+      padding: 2.4rem;
+
+      .btns {
+        width: 100%;
+        @include flex-layout(row, center, center, 2rem);
+
+        button {
+          font-size: 2rem;
+          font-weight: bold;
+          padding: 1rem;
+          border-radius: 1rem;
+          border: none;
+
+          &.delete {
+            background-color: $col-500;
+            color: $col-300;
+
+            &:hover {
+              background-color: $col-600;
+            }
+          }
+        }
+      }
+      // position: absolute;
     }
 
     .form-div {
@@ -145,7 +177,6 @@
     }
   }
 }
-
 
 @media (min-width: 768px) {
   .details {

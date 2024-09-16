@@ -5,7 +5,7 @@ import { CommentService } from '../../services/comment.service';
 import { Observable, of, switchMap } from 'rxjs';
 import { Comment, Data } from '../../interfaces/data';
 import { CommonModule } from '@angular/common';
-import { FormsComponent } from "../forms/forms.component";
+import { FormsComponent } from '../forms/forms.component';
 
 @Component({
   selector: 'app-post-details',
@@ -20,6 +20,7 @@ export class PostDetailsComponent {
   currentPost!: Data;
 
   showFormModal: boolean = false;
+  deleteModal = false;
 
   constructor(
     private postService: DataService,
@@ -65,6 +66,27 @@ export class PostDetailsComponent {
 
   openPostForm() {
     this.showFormModal = true;
+  }
+
+  openDeleteModal() {
+    this.deleteModal = true;
+  }
+
+  closeDeleteModal() {
+    this.deleteModal = false;
+  }
+
+  onDeleteModal(id: number) {
+    console.log('deleting post with id', id);
+    this.postService.deletePost(id).subscribe({
+      next: () => {
+        this.closeDeleteModal();
+        this.router.navigate(['/posts']);
+      },
+      error: (err) => {
+        console.error('Error deleting post', err);
+      },
+    });
   }
 
   handleFormEdit(post: Data) {

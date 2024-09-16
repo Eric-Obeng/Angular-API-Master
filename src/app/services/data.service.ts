@@ -100,6 +100,10 @@ export class DataService {
           (p) => p.id !== id
         );
         this.updateLocalPosts(updatedPosts);
+      }),
+      catchError((error) => {
+        console.error('Error deleting post', error);
+        return throwError(() => new Error('Error deleting post'));
       })
     );
   }
